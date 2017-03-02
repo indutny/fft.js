@@ -3,7 +3,7 @@
 const FFT = require('../');
 
 console.time('construct');
-const f = new FFT(4096 * 2);
+const f = new FFT(8192);
 console.timeEnd('construct');
 
 const input = [];

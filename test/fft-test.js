@@ -8,6 +8,12 @@ function fixRound(r) {
 }
 
 describe('FFT.js', () => {
+  it('should compute tables', () => {
+    const f = new FFT(8);
+
+    assert.strictEqual(f.table.length, 16);
+  });
+
   it('should convert to complex array', () => {
     const f = new FFT(4);
 
