@@ -1,0 +1,26 @@
+{
+  "name": "fft.js",
+  "version": "1.0.0",
+  "description": "Fast Fourier Transform",
+  "main": "lib/fft.js",
+  "scripts": {
+    "test": "mocha --reporter=spec test/*-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/indutny/fft.js.git"
+  },
+  "keywords": [
+    "fft",
+    "fourier"
+  ],
+  "author": "Fedor Indutny <fedor@indutny.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/indutny/fft.js/issues"
+  },
+  "homepage": "https://github.com/indutny/fft.js#readme",
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}
