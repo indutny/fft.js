@@ -1,7 +1,7 @@
 {
   "name": "fft.js",
   "version": "1.0.0",
-  "description": "Fast Fourier Transform",
+  "description": "Fast Fourier Transform (radix-2)",
   "main": "lib/fft.js",
   "scripts": {
     "test": "mocha --reporter=spec test/*-test.js"
