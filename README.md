@@ -10,6 +10,8 @@ const FFT = require('fft.js');
 const f = new FFT(2048);
 
 const input = new Array(2048);
+input.fill(0);
+
 const data = f.toComplexArray(input);
 f.transform(data);
 const output = f.fromComplexArray(data);
