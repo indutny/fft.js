@@ -4,7 +4,7 @@ Implementation of Radix-2 FFT.
 
 ## Usage
 
-```
+```js
 const FFT = require('fft.js');
 
 const f = new FFT(2048);
