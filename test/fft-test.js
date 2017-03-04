@@ -56,6 +56,15 @@ describe('FFT.js', () => {
                      [ 1, 2, 3, 4 ]);
   });
 
+  it('should throw on invalid transform inputs', () => {
+    const f = new FFT(8);
+    const output = f.createComplexArray();
+
+    assert.throws(() => {
+      f.transform(output, output);
+    }, /must be different/);
+  });
+
   it('should transform trivial radix-2 case', () => {
     const f = new FFT(2);
 
