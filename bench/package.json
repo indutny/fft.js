@@ -1,0 +1,22 @@
+{
+  "name": "bench",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Benchmarks for fft.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/indutny/fft.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "benchmark": "^2.1.3",
+    "fft": "^0.2.1",
+    "dsp.js": "github:corbanbrook/dsp.js"
+  }
+}
