@@ -1,0 +1,60 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{slashed}
+
+\title{radix-4 Cooley-Tukey}
+\author{Fedor Indutny}
+
+\begin{document}
+
+\maketitle
+
+\begin{equation}
+\begin{split}
+X_k & = \sum^{N-1}_{n=0} x_n e^{-\frac{2 \pi i}{N} nk} \\
+  & = \sum^{N/4 - 1}_{n=0} x_{4n} e^{-\frac{2 \pi i}{N/4} nk} + \
+       x_{4n+1} e^{-\frac{2 \pi i}{N/4} (n+1/4) k} + \
+       x_{4n+2} e^{-\frac{2 \pi i}{N/4} (n+2/4) k} + \\
+  & \ \ \ \ \ \ \ \ x_{4n+3} e^{-\frac{2 \pi i}{N/4} (n+3/4) k} \\
+  & = \sum^{N/4 - 1}_{n=0} x_{4n} e^{-\frac{2 \pi i}{N/4} nk} + \
+        e^{-\frac{2 \pi i}{N}k} \sum^{N/4 - 1}_{n=0} x_{4n + 1} \
+          e^{-\frac{2 \pi i}{N} nk} + \
+        \dots \\
+  & = A_k + e^{-\frac{2 \pi i}{N}k} B_k + \
+        e^{-2 \frac{2 \pi i}{N}k} C_k + e^{-3 \frac{2 \pi i}{N}k} D_k
+\end{split}
+\end{equation}
+
+Now, for $0 <= k < N/4$:
+
+\begin{equation}
+\begin{split}
+X_{k + N/4} & = A_k + e^{-\frac{2 \pi i}{N}(k + N/4)} B_k + \
+        e^{-2 \frac{2 \pi i}{N}(k + N/4)} C_k + e^{-3 \frac{2 \pi i}{N}(k+ N/4)} D_k \\
+   & = A_k + e^{-\frac{1}{2} \pi i} e^{-\frac{2 \pi i}{N}k} B_k + \
+         e^{-\pi i} e^{-2 \frac{2 \pi i}{N}k} C_k + \
+         e^{-\frac{3}{2} \pi i} e^{-3 \frac{2 \pi i}{N}k} D_k \\
+   & = A_k - i e^{-\frac{2 \pi i}{N}k} B_k - e^{-2 \frac{2 \pi i}{N}k} C_k + 
+         i e^{-3 \frac{2 \pi i}{N}k} D_k
+\end{split}
+\end{equation}
+
+So putting all together:
+
+\begin{equation}
+\begin{split}
+X_k & = A_k + e^{-\frac{2 \pi i}{N}k} B_k + \
+        e^{-2 \frac{2 \pi i}{N}k} C_k + e^{-3 \frac{2 \pi i}{N}k} D_k \\
+X_{k + N/4} & = A_k - i e^{-\frac{2 \pi i}{N}k} B_k - e^{-2 \frac{2 \pi i}{N}k} C_k + \
+         i e^{-3 \frac{2 \pi i}{N}k} D_k \\
+X_{k + 2N/4} & = A_k - e^{-\frac{2 \pi i}{N}k} B_k + e^{-2 \frac{2 \pi i}{N}k} C_k \
+  -e^{-3 \frac{2 \pi i}{N}k} D_k \\
+X_{k + 3N/4} & = A_k + i e^{-\frac{2 \pi i}{N}k} B_k - e^{-2 \frac{2 \pi i}{N}k} C_k \
+  -i e^{-3 \frac{2 \pi i}{N}k} D_k
+\end{split}
+\end{equation}
+
+\end{document}

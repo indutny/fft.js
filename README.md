@@ -1,15 +1,15 @@
 # FFT.js
 
-Implementation of Radix-2 FFT.
+Implementation of Radix-4 FFT.
 
 ## Usage
 
 ```js
 const FFT = require('fft.js');
 
-const f = new FFT(2048);
+const f = new FFT(4096);
 
-const input = new Array(2048);
+const input = new Array(4096);
 input.fill(0);
 
 const data = f.toComplexArray(input);

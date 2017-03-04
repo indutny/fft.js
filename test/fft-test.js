@@ -29,23 +29,6 @@ describe('FFT.js', () => {
   });
 
   it('should transform trivial case', () => {
-    const f = new FFT(2);
-
-    let data = f.toComplexArray([ 0.5, -0.5 ]);
-    f.transform(data);
-    assert.deepEqual(data, [ 0, 0, 1, 0 ]);
-
-    data = f.toComplexArray([ 0.5, 0.5 ]);
-    f.transform(data);
-    assert.deepEqual(data, [ 1, 0, 0, 0 ]);
-
-    // Linear combination
-    data = f.toComplexArray([ 1, 0 ]);
-    f.transform(data);
-    assert.deepEqual(data, [ 1, 0, 1, 0 ]);
-  });
-
-  it('should transform first recursive case', () => {
     const f = new FFT(4);
 
     let data = f.toComplexArray([ 1, 0.707106, 0, -0.707106 ]);
@@ -62,13 +45,15 @@ describe('FFT.js', () => {
 
     const data = f.toComplexArray([ 1, 0.707106, 0, -0.707106 ]);
     f.transform(data);
+    // [ 1, 0, 1, -1.414212, 1, 0, 0.9999999999999999, 1.414212 ]
+    assert.deepEqual(data.map(fixRound), [ 1, 0, 1, -1.414, 1, 0, 1, 1.414 ]);
     f.inverseTransform(data);
     assert.deepEqual(f.fromComplexArray(data), [ 1, 0.707106, 0, -0.707106 ]);
   });
 
   it('should transform big recursive case', () => {
     const input = [];
-    for (let i = 0; i < 128; i++)
+    for (let i = 0; i < 256; i++)
       input.push(i);
 
     const f = new FFT(input.length);
