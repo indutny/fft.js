@@ -2,7 +2,7 @@
 [![Build Status](https://secure.travis-ci.org/indutny/fft.js.svg)](http://travis-ci.org/indutny/fft.js)
 [![NPM version](https://badge.fury.io/js/fft.js.svg)](https://badge.fury.io/js/fft.js)
 
-Implementation of Radix-4 (and Radix-2) FFT.
+Implementation of Radix-4 FFT.
 
 ## Usage
 
@@ -28,28 +28,12 @@ f.inverseTransform(data, out);
 ## Benchmark
 
 ```
-radix-2
-[32] construct: 0.321ms
-[32] transform 679130.37 ops/sec
-[128] construct: 0.059ms
-[128] transform 311321.42 ops/sec
-[512] construct: 0.069ms
-[512] transform 63313.65 ops/sec
-[2048] construct: 0.336ms
-[2048] transform 14221.73 ops/sec
-[8192] construct: 1.082ms
-[8192] transform 3100.01 ops/sec
-radix-4
-[64] construct: 0.037ms
-[64] transform 572586.5 ops/sec
-[256] construct: 0.040ms
-[256] transform 244900.6 ops/sec
-[1024] construct: 0.138ms
-[1024] transform 49646.94 ops/sec
-[4096] construct: 0.481ms
-[4096] transform 10867.49 ops/sec
-[16384] construct: 2.060ms
-[16384] transform 1990.13 ops/sec
+$ node bench/index.js
+size=16384 construct x 1,593 ops/sec ±1.70% (87 runs sampled)
+size=2048 transform x 17,956 ops/sec ±0.62% (95 runs sampled)
+size=4096 transform x 10,469 ops/sec ±0.99% (92 runs sampled)
+size=8192 transform x 3,871 ops/sec ±1.23% (94 runs sampled)
+size=16384 transform x 2,129 ops/sec ±0.88% (93 runs sampled)
 ```
 
 #### LICENSE
