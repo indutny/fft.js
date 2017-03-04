@@ -4,6 +4,7 @@
   "description": "Fast Fourier Transform (radix-4)",
   "main": "lib/fft.js",
   "scripts": {
+    "format": "eslint --fix lib/*.js test/*.js bench/index.js",
     "lint": "eslint lib/*.js test/*.js bench/index.js",
     "bench": "cd bench && npm install && node .",
     "test": "mocha --reporter=spec test/*-test.js && npm run lint"
