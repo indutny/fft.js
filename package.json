@@ -1,6 +1,6 @@
 {
   "name": "fft.js",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Fast Fourier Transform (radix-4)",
   "main": "lib/fft.js",
   "scripts": {
