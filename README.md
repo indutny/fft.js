@@ -13,38 +13,41 @@ const input = new Array(4096);
 input.fill(0);
 
 const data = f.toComplexArray(input);
-f.transform(data);
-const output = f.fromComplexArray(data);
+const out = f.createComplexArray();
+
+f.transform(out, data);
+console.log(out);
+console.log(f.fromComplexArray(out));
 
 // For inverse - use:
-f.inverseTransform(data);
+f.inverseTransform(data, out);
 ```
 
 ## Benchmark
 
 ```
 radix-2
-[32] construct: 0.291ms
-[32] transform 654957.34 ops/sec
-[128] construct: 0.072ms
-[128] transform 197276.71 ops/sec
-[512] construct: 0.089ms
-[512] transform 38549.19 ops/sec
-[2048] construct: 1.620ms
-[2048] transform 6869.82 ops/sec
-[8192] construct: 1.159ms
-[8192] transform 1124.28 ops/sec
+[32] construct: 0.321ms
+[32] transform 679130.37 ops/sec
+[128] construct: 0.059ms
+[128] transform 311321.42 ops/sec
+[512] construct: 0.069ms
+[512] transform 63313.65 ops/sec
+[2048] construct: 0.336ms
+[2048] transform 14221.73 ops/sec
+[8192] construct: 1.082ms
+[8192] transform 3100.01 ops/sec
 radix-4
-[64] construct: 0.051ms
-[64] transform 458039.95 ops/sec
-[256] construct: 0.049ms
-[256] transform 176299.68 ops/sec
-[1024] construct: 0.151ms
-[1024] transform 32219.76 ops/sec
-[4096] construct: 0.483ms
-[4096] transform 5598.1 ops/sec
-[16384] construct: 1.622ms
-[16384] transform 764.15 ops/sec
+[64] construct: 0.037ms
+[64] transform 572586.5 ops/sec
+[256] construct: 0.040ms
+[256] transform 244900.6 ops/sec
+[1024] construct: 0.138ms
+[1024] transform 49646.94 ops/sec
+[4096] construct: 0.481ms
+[4096] transform 10867.49 ops/sec
+[16384] construct: 2.060ms
+[16384] transform 1990.13 ops/sec
 ```
 
 #### LICENSE
