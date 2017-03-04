@@ -1,6 +1,6 @@
 # FFT.js
 
-Implementation of Radix-4 FFT.
+Implementation of Radix-4 (and Radix-2) FFT.
 
 ## Usage
 

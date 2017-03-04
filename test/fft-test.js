@@ -28,6 +28,23 @@ describe('FFT.js', () => {
                      [ 1, 2, 3, 4 ]);
   });
 
+  it('should transform trivial radix-2 case', () => {
+    const f = new FFT(2);
+
+    let data = f.toComplexArray([ 0.5, -0.5 ]);
+    f.transform(data);
+    assert.deepEqual(data, [ 0, 0, 1, 0 ]);
+
+    data = f.toComplexArray([ 0.5, 0.5 ]);
+    f.transform(data);
+    assert.deepEqual(data, [ 1, 0, 0, 0 ]);
+
+    // Linear combination
+    data = f.toComplexArray([ 1, 0 ]);
+    f.transform(data);
+    assert.deepEqual(data, [ 1, 0, 1, 0 ]);
+  });
+
   it('should transform trivial case', () => {
     const f = new FFT(4);
 
@@ -54,6 +71,19 @@ describe('FFT.js', () => {
   it('should transform big recursive case', () => {
     const input = [];
     for (let i = 0; i < 256; i++)
+      input.push(i);
+
+    const f = new FFT(input.length);
+
+    let data = f.toComplexArray(input);
+    f.transform(data);
+    f.inverseTransform(data);
+    assert.deepEqual(f.fromComplexArray(data).map(fixRound), input);
+  });
+
+  it('should transform big recursive radix-2 case', () => {
+    const input = [];
+    for (let i = 0; i < 128; i++)
       input.push(i);
 
     const f = new FFT(input.length);
