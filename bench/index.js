@@ -18,7 +18,7 @@ function construct(size) {
   const suite = new benchmark.Suite();
 
   suite.add('fft.js', () => {
-    const f = new FFT(size);
+    new FFT(size);
   });
 
   return suite;
@@ -75,6 +75,7 @@ const benchmarks = [
   { title: 'transform size=16384', suite: transform(16384) }
 ];
 
+/* eslint-disable no-console */
 benchmarks.forEach((bench) => {
   console.log('===== %s =====', bench.title);
   bench.suite.on('cycle', (event) => {

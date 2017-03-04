@@ -4,8 +4,9 @@
   "description": "Fast Fourier Transform (radix-4)",
   "main": "lib/fft.js",
   "scripts": {
+    "lint": "eslint lib/*.js test/*.js bench/index.js",
     "bench": "cd bench && npm install && node .",
-    "test": "mocha --reporter=spec test/*-test.js"
+    "test": "mocha --reporter=spec test/*-test.js && npm run lint"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/indutny/fft.js#readme",
   "devDependencies": {
+    "eslint": "^3.17.0",
     "mocha": "^3.2.0"
   }
 }
