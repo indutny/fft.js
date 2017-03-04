@@ -14,6 +14,28 @@ describe('FFT.js', () => {
     assert.strictEqual(f.table.length, 16);
   });
 
+  it('should throw on invalid table size', () => {
+    assert.throws(() => {
+      new FFT(9);
+    }, /power of two/);
+
+    assert.throws(() => {
+      new FFT(7);
+    }, /power of two/);
+
+    assert.throws(() => {
+      new FFT(3);
+    }, /power of two/);
+
+    assert.throws(() => {
+      new FFT(0);
+    }, /power of two/);
+
+    assert.throws(() => {
+      new FFT(-1);
+    }, /power of two/);
+  });
+
   it('should create complex array', () => {
     const f = new FFT(4);
 
