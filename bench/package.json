@@ -16,7 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "benchmark": "^2.1.3",
+    "dsp.js": "github:corbanbrook/dsp.js",
     "fft": "^0.2.1",
-    "dsp.js": "github:corbanbrook/dsp.js"
+    "fourier": "^0.2.1"
   }
 }

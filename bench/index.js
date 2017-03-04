@@ -3,7 +3,8 @@
 const FFT = require('../');
 const external = {
   jensnockert: require('fft'),
-  dspjs: require('dsp.js')
+  dspjs: require('dsp.js'),
+  drom: require('fourier')
 };
 const benchmark = require('benchmark');
 
@@ -57,12 +58,29 @@ function addDSPJS(suite, size) {
   });
 }
 
+function addDrom(suite, size) {
+  const heap = external.drom.custom.alloc(size, 3);
+  const stdlib = {
+    Math: Math,
+    Float32Array: Float32Array,
+    Float64Array: Float64Array
+  };
+  const f = new external.drom.custom[`fft_f64_${size}_asm`](stdlib, null, heap);
+
+  f.init();
+
+  suite.add('drom', () => {
+    f.transform();
+  });
+}
+
 function transform(size) {
   const suite = new benchmark.Suite();
 
   addSelf(suite, size);
   addJensNockert(suite, size);
   addDSPJS(suite, size);
+  addDrom(suite, size);
 
   return suite;
 }
