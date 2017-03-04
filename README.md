@@ -33,10 +33,10 @@ $ npm run bench
     fft.js x 1,575 ops/sec ±1.83% (87 runs sampled)
   Fastest is fft.js
 ===== transform size=2048 =====
-    fft.js x 17,918 ops/sec ±0.79% (94 runs sampled)
+    fft.js x 21,480 ops/sec ±0.44% (96 runs sampled)
     jensnockert x 5,023 ops/sec ±0.82% (94 runs sampled)
     dsp.js x 20,034 ops/sec ±0.58% (93 runs sampled)
-  Fastest is dsp.js
+  Fastest is fft.js
 ===== transform size=4096 =====
     fft.js x 10,502 ops/sec ±0.67% (94 runs sampled)
     jensnockert x 3,918 ops/sec ±0.62% (93 runs sampled)
