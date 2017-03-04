@@ -30,27 +30,27 @@ f.inverseTransform(data, out);
 ```
 $ npm run bench
 ===== table construction =====
-    fft.js x 1,575 ops/sec ±1.83% (87 runs sampled)
+    fft.js x 1,583 ops/sec ±1.71% (86 runs sampled)
   Fastest is fft.js
 ===== transform size=2048 =====
-    fft.js x 21,480 ops/sec ±0.44% (96 runs sampled)
-    jensnockert x 5,023 ops/sec ±0.82% (94 runs sampled)
-    dsp.js x 20,034 ops/sec ±0.58% (93 runs sampled)
+    fft.js x 22,155 ops/sec ±0.64% (92 runs sampled)
+    jensnockert x 5,059 ops/sec ±0.77% (93 runs sampled)
+    dsp.js x 20,033 ops/sec ±0.62% (94 runs sampled)
   Fastest is fft.js
 ===== transform size=4096 =====
-    fft.js x 10,502 ops/sec ±0.67% (94 runs sampled)
-    jensnockert x 3,918 ops/sec ±0.62% (93 runs sampled)
-    dsp.js x 6,398 ops/sec ±0.52% (94 runs sampled)
+    fft.js x 11,303 ops/sec ±0.67% (96 runs sampled)
+    jensnockert x 3,907 ops/sec ±0.90% (95 runs sampled)
+    dsp.js x 6,359 ops/sec ±0.77% (94 runs sampled)
   Fastest is fft.js
 ===== transform size=8192 =====
-    fft.js x 3,886 ops/sec ±0.76% (95 runs sampled)
-    jensnockert x 1,187 ops/sec ±0.72% (93 runs sampled)
-    dsp.js x 2,120 ops/sec ±0.44% (94 runs sampled)
+    fft.js x 4,616 ops/sec ±0.90% (93 runs sampled)
+    jensnockert x 1,179 ops/sec ±0.70% (94 runs sampled)
+    dsp.js x 2,705 ops/sec ±0.64% (95 runs sampled)
   Fastest is fft.js
 ===== transform size=16384 =====
-    fft.js x 2,112 ops/sec ±0.81% (93 runs sampled)
-    jensnockert x 836 ops/sec ±0.82% (92 runs sampled)
-    dsp.js x 828 ops/sec ±0.50% (93 runs sampled)
+    fft.js x 2,191 ops/sec ±0.99% (92 runs sampled)
+    jensnockert x 850 ops/sec ±1.12% (90 runs sampled)
+    dsp.js x 887 ops/sec ±0.69% (93 runs sampled)
   Fastest is fft.js
 ```
 
