@@ -52,6 +52,9 @@ function addJensNockert(suite, size) {
 function addDSPJS(suite, size) {
   const f = new external.dspjs.FFT(size, 44100);
 
+  // Make benchmark fair
+  f.calculateSpectrum = function nop() {};
+
   const input = createInput(size);
   suite.add('dsp.js', () => {
     f.forward(input);
