@@ -4,7 +4,8 @@ const FFT = require('../');
 const external = {
   jensnockert: require('fft'),
   dspjs: require('dsp.js'),
-  drom: require('fourier')
+  drom: require('fourier'),
+  fourierTransform: require('fourier-transform')
 };
 const benchmark = require('benchmark');
 
@@ -74,6 +75,15 @@ function addDrom(suite, size) {
   });
 }
 
+function addFourierTransform(suite, size) {
+  const forward = external.fourierTransform
+
+  const input = createInput(size);
+  suite.add('fourier-transform', () => {
+    forward(input)
+  })
+}
+
 function transform(size) {
   const suite = new benchmark.Suite();
 
@@ -81,6 +91,7 @@ function transform(size) {
   addJensNockert(suite, size);
   addDSPJS(suite, size);
   addDrom(suite, size);
+  addFourierTransform(suite, size);
 
   return suite;
 }
