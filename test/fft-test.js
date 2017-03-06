@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('assert');
+const external = require('fft');
 const FFT = require('../');
 
 function fixRound(r) {
@@ -134,5 +135,23 @@ describe('FFT.js', () => {
     f.transform(out, data);
     f.inverseTransform(data, out);
     assert.deepEqual(f.fromComplexArray(data).map(fixRound), input);
+  });
+
+  it('should verify against other library', () => {
+    const size = 4096;
+
+    const ex = new external.complex(size, false);
+
+    const input = new Float64Array(size * 2);
+    for (let i = 0; i < input.length; i += 2)
+      input[i] = i >>> 1;
+    const expected = new Float64Array(size * 2);
+
+    ex.simple(expected, input, 'complex');
+
+    const self = new FFT(size);
+    const out = self.createComplexArray();
+    self.transform(out, input);
+    assert.deepEqual(out.map(fixRound), expected.map(fixRound));
   });
 });
