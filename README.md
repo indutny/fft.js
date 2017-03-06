@@ -72,16 +72,20 @@ $ npm run bench
     drom x 1,428 ops/sec ±0.56% (93 runs sampled)
   Fastest is fft.js
 ===== realTransform size=2048 =====
-    fft.js x 44,499 ops/sec ±0.71% (90 runs sampled)
+    fft.js x 44,447 ops/sec ±0.64% (91 runs sampled)
+    fourier-transform x 30,558 ops/sec ±0.82% (92 runs sampled)
   Fastest is fft.js
 ===== realTransform size=4096 =====
-    fft.js x 19,234 ops/sec ±0.84% (93 runs sampled)
+    fft.js x 19,363 ops/sec ±0.71% (95 runs sampled)
+    fourier-transform x 14,290 ops/sec ±0.75% (94 runs sampled)
   Fastest is fft.js
 ===== realTransform size=8192 =====
-    fft.js x 9,137 ops/sec ±0.83% (94 runs sampled)
+    fft.js x 9,240 ops/sec ±0.77% (95 runs sampled)
+    fourier-transform x 5,922 ops/sec ±0.65% (94 runs sampled)
   Fastest is fft.js
 ===== realTransform size=16384 =====
-    fft.js x 3,873 ops/sec ±1.69% (93 runs sampled)
+    fft.js x 3,809 ops/sec ±1.91% (91 runs sampled)
+    fourier-transform x 2,536 ops/sec ±0.65% (94 runs sampled)
   Fastest is fft.js
 ```
 

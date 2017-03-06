@@ -4,7 +4,8 @@ const FFT = require('../');
 const external = {
   jensnockert: require('fft'),
   dspjs: require('dsp.js'),
-  drom: require('fourier')
+  drom: require('fourier'),
+  fourierTransform: require('fourier-transform')
 };
 const benchmark = require('benchmark');
 
@@ -116,10 +117,23 @@ function addRealSelf(suite, size) {
   });
 }
 
+function addFourierTransform(suite, size) {
+  const forward = external.fourierTransform;
+
+  const input = createInput(size);
+  suite.add('fourier-transform', () => {
+    // It is not exactly fair, since `fourier-transform` also computes
+    // magnitude. However, when removing this magnitude code locally, fft.js
+    // outperforms `fourier-transform` by almost the same margin.
+    forward(input);
+  });
+}
+
 function realTransform(size) {
   const suite = new benchmark.Suite();
 
   addRealSelf(suite, size);
+  addFourierTransform(suite, size);
 
   return suite;
 }
