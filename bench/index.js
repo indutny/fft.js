@@ -12,7 +12,7 @@ const benchmark = require('benchmark');
 function createInput(size) {
   const res = new Float64Array(size);
   for (let i = 0; i < res.length; i++)
-    res[i] = Math.random();
+    res[i] = Math.random() * 2 - 1;
   return res;
 }
 
@@ -28,9 +28,7 @@ function construct(size) {
 
 function addSelf(suite, size) {
   const f = new FFT(size);
-  const input = [];
-  for (let i = 0; i < f.length; i++)
-    input[i] = Math.random();
+  const input = createInput(f.size);
   const data = f.toComplexArray(input);
   const out = f.createComplexArray();
 
@@ -52,6 +50,9 @@ function addJensNockert(suite, size) {
 
 function addDSPJS(suite, size) {
   const f = new external.dspjs.FFT(size, 44100);
+
+  // Make benchmark fair
+  f.calculateSpectrum = function nop() {};
 
   const input = createInput(size);
   suite.add('dsp.js', () => {
