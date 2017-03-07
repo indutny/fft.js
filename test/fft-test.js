@@ -138,20 +138,21 @@ describe('FFT.js', () => {
   });
 
   it('should verify against other library', () => {
-    const size = 4096;
+    const sizes = [ 512, 1024, 2048, 4096 ];
+    sizes.forEach((size) => {
+      const ex = new external.complex(size, false);
 
-    const ex = new external.complex(size, false);
+      const input = new Float64Array(size * 2);
+      for (let i = 0; i < input.length; i += 2)
+        input[i] = i >>> 1;
+      const expected = new Float64Array(size * 2);
 
-    const input = new Float64Array(size * 2);
-    for (let i = 0; i < input.length; i += 2)
-      input[i] = i >>> 1;
-    const expected = new Float64Array(size * 2);
+      ex.simple(expected, input, 'complex');
 
-    ex.simple(expected, input, 'complex');
-
-    const self = new FFT(size);
-    const out = self.createComplexArray();
-    self.transform(out, input);
-    assert.deepEqual(out.map(fixRound), expected.map(fixRound));
+      const self = new FFT(size);
+      const out = self.createComplexArray();
+      self.transform(out, input);
+      assert.deepEqual(out.map(fixRound), expected.map(fixRound));
+    });
   });
 });
