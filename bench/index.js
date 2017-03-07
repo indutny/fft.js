@@ -77,12 +77,12 @@ function addDrom(suite, size) {
 }
 
 function addFourierTransform(suite, size) {
-  const forward = external.fourierTransform
+  const forward = external.fourierTransform;
 
   const input = createInput(size);
   suite.add('fourier-transform', () => {
-    forward(input)
-  })
+    forward(input);
+  });
 }
 
 function transform(size) {
