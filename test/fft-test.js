@@ -17,6 +17,10 @@ describe('FFT.js', () => {
 
   it('should throw on invalid table size', () => {
     assert.throws(() => {
+      new FFT(1);
+    }, /bigger than 1/);
+
+    assert.throws(() => {
       new FFT(9);
     }, /power of two/);
 
@@ -138,7 +142,7 @@ describe('FFT.js', () => {
   });
 
   it('should verify against other library', () => {
-    const sizes = [ 512, 1024, 2048, 4096 ];
+    const sizes = [ 2, 4, 8, 16, 512, 1024, 2048, 4096 ];
     sizes.forEach((size) => {
       const ex = new external.complex(size, false);
 
