@@ -8,6 +8,23 @@ const external = {
 };
 const benchmark = require('benchmark');
 
+function regexFilter(value) {
+  if (value !== undefined && value.length !== 0)
+    return new RegExp(value, 'ig');
+  else
+    return /./g;
+}
+
+const filter0 = regexFilter(process.argv[2]);
+const filter1 = regexFilter(process.argv[3]);
+
+function addFiltered(suite, name, body) {
+  if (name.match(filter1) === null)
+    return;
+
+  suite.add(name, body);
+}
+
 function createInput(size) {
   const res = new Float64Array(size);
   for (let i = 0; i < res.length; i++)
@@ -18,7 +35,7 @@ function createInput(size) {
 function construct(size) {
   const suite = new benchmark.Suite();
 
-  suite.add('fft.js', () => {
+  addFiltered(suite, 'fft.js', () => {
     new FFT(size);
   });
 
@@ -31,7 +48,7 @@ function addSelf(suite, size) {
   const data = f.toComplexArray(input);
   const out = f.createComplexArray();
 
-  suite.add('fft.js', () => {
+  addFiltered(suite, 'fft.js', () => {
     f.transform(out, data);
   });
 }
@@ -42,7 +59,7 @@ function addJensNockert(suite, size) {
   const input = createInput(size * 2);
   const output = new Float64Array(size * 2);
 
-  suite.add('jensnockert', () => {
+  addFiltered(suite, 'jensnockert', () => {
     f.simple(output, input, 'complex');
   });
 }
@@ -54,7 +71,7 @@ function addDSPJS(suite, size) {
   f.calculateSpectrum = function nop() {};
 
   const input = createInput(size);
-  suite.add('dsp.js', () => {
+  addFiltered(suite, 'dsp.js', () => {
     f.forward(input);
   });
 }
@@ -70,7 +87,7 @@ function addDrom(suite, size) {
 
   f.init();
 
-  suite.add('drom', () => {
+  addFiltered(suite, 'drom', () => {
     f.transform();
   });
 }
@@ -96,6 +113,8 @@ const benchmarks = [
 
 /* eslint-disable no-console */
 benchmarks.forEach((bench) => {
+  if (bench.title.match(filter0) === null)
+    return;
   console.log('===== %s =====', bench.title);
   bench.suite.on('cycle', (event) => {
     console.log('    '+ String(event.target));
