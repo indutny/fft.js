@@ -15,8 +15,10 @@ function regexFilter(value) {
     return /./g;
 }
 
+/*eslint-disable no-undef */
 const filter0 = regexFilter(process.argv[2]);
 const filter1 = regexFilter(process.argv[3]);
+/*eslint-enable no-undef */
 
 function addFiltered(suite, name, body) {
   if (name.match(filter1) === null)
