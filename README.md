@@ -30,31 +30,31 @@ f.inverseTransform(data, out);
 ```
 $ npm run bench
 ===== table construction =====
-    fft.js x 1,259 ops/sec ±1.61% (86 runs sampled)
+    fft.js x 1,426 ops/sec ±0.70% (93 runs sampled)
   Fastest is fft.js
 ===== transform size=2048 =====
-    fft.js x 31,259 ops/sec ±0.68% (89 runs sampled)
-    jensnockert x 5,005 ops/sec ±0.73% (95 runs sampled)
-    dsp.js x 22,172 ops/sec ±0.62% (91 runs sampled)
-    drom x 14,496 ops/sec ±0.58% (94 runs sampled)
+    fft.js x 35,153 ops/sec ±0.83% (94 runs sampled)
+    jensnockert x 5,037 ops/sec ±0.98% (91 runs sampled)
+    dsp.js x 23,143 ops/sec ±0.64% (96 runs sampled)
+    drom x 14,372 ops/sec ±0.76% (92 runs sampled)
   Fastest is fft.js
 ===== transform size=4096 =====
-    fft.js x 13,945 ops/sec ±0.68% (94 runs sampled)
-    jensnockert x 3,851 ops/sec ±0.80% (95 runs sampled)
-    dsp.js x 7,769 ops/sec ±0.71% (94 runs sampled)
-    drom x 6,619 ops/sec ±0.78% (93 runs sampled)
+    fft.js x 15,676 ops/sec ±0.76% (94 runs sampled)
+    jensnockert x 3,864 ops/sec ±1.02% (93 runs sampled)
+    dsp.js x 7,905 ops/sec ±0.50% (97 runs sampled)
+    drom x 6,718 ops/sec ±0.78% (96 runs sampled)
   Fastest is fft.js
 ===== transform size=8192 =====
-    fft.js x 6,222 ops/sec ±0.89% (95 runs sampled)
-    jensnockert x 1,180 ops/sec ±0.77% (93 runs sampled)
-    dsp.js x 2,298 ops/sec ±0.61% (96 runs sampled)
-    drom x 3,053 ops/sec ±0.64% (95 runs sampled)
+    fft.js x 6,896 ops/sec ±0.79% (96 runs sampled)
+    jensnockert x 1,193 ops/sec ±0.73% (94 runs sampled)
+    dsp.js x 2,300 ops/sec ±0.74% (95 runs sampled)
+    drom x 3,164 ops/sec ±0.67% (95 runs sampled)
   Fastest is fft.js
 ===== transform size=16384 =====
-    fft.js x 2,751 ops/sec ±0.82% (93 runs sampled)
-    jensnockert x 840 ops/sec ±0.90% (91 runs sampled)
-    dsp.js x 931 ops/sec ±0.67% (92 runs sampled)
-    drom x 1,416 ops/sec ±0.71% (91 runs sampled)
+    fft.js x 3,123 ops/sec ±0.84% (95 runs sampled)
+    jensnockert x 855 ops/sec ±1.02% (92 runs sampled)
+    dsp.js x 948 ops/sec ±0.70% (94 runs sampled)
+    drom x 1,428 ops/sec ±0.56% (93 runs sampled)
   Fastest is fft.js
 ```
 
