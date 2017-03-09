@@ -45,6 +45,7 @@ describe('FFT.js', () => {
     const f = new FFT(4);
 
     assert.strictEqual(f.createComplexArray().length, 8);
+    assert.strictEqual(f.createComplexArray()[0], 0);
   });
 
   it('should convert to complex array', () => {
