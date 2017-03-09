@@ -7,7 +7,9 @@
     "format": "eslint --fix lib/*.js test/*.js bench/index.js",
     "lint": "eslint lib/*.js test/*.js bench/index.js",
     "bench": "cd bench && npm install && node .",
-    "test": "mocha --reporter=spec test/*-test.js && npm run lint"
+    "build": "webpack --progress --colors -p",
+    "test": "mocha --reporter=spec test/*-test.js && npm run lint",
+    "version": "npm run build && git add dist/"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,10 @@
   },
   "homepage": "https://github.com/indutny/fft.js#readme",
   "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.4.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
     "eslint": "^3.17.0",
     "fft": "^0.2.1",
     "mocha": "^3.2.0",
