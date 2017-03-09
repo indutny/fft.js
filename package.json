@@ -7,7 +7,7 @@
     "format": "eslint --fix lib/*.js test/*.js bench/index.js",
     "lint": "eslint lib/*.js test/*.js bench/index.js",
     "bench": "cd bench && npm install && node .",
-    "build": "webpack --progress --colors -p",
+    "build": "webpack --progress --colors -p --output-library FFTJS",
     "test": "mocha --reporter=spec test/*-test.js && npm run lint",
     "version": "npm run build && git add dist/"
   },
