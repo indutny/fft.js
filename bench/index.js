@@ -28,7 +28,7 @@ function addFiltered(suite, name, body) {
 }
 
 function createInput(size) {
-  const res = new Float64Array(size);
+  const res = new Array(size);
   for (let i = 0; i < res.length; i++)
     res[i] = Math.random() * 2 - 1;
   return res;
@@ -59,7 +59,7 @@ function addJensNockert(suite, size) {
   const f = new external.jensnockert.complex(size, false);
 
   const input = createInput(size * 2);
-  const output = new Float64Array(size * 2);
+  const output = new Array(size * 2);
 
   addFiltered(suite, 'jensnockert', () => {
     f.simple(output, input, 'complex');
