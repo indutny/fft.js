@@ -1,7 +1,7 @@
 {
   "name": "fft.js",
   "version": "4.0.0",
-  "description": "Fast Fourier Transform (radix-4)",
+  "description": "Insanely Fast Fourier Transform (radix-4)",
   "main": "lib/fft.js",
   "scripts": {
     "format": "eslint --fix lib/*.js test/*.js bench/index.js",
