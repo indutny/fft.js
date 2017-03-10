@@ -169,15 +169,18 @@ describe('FFT.js', () => {
       const complex = new FFT(size);
 
       const input = complex.createComplexArray();
-      for (let i = 0; i < input.length; i += 2)
+      const realInput = new Array(size);
+      for (let i = 0; i < input.length; i += 2) {
         input[i] = generator(i >>> 1);
+        realInput[i >>> 1] = input[i];
+      }
       const expected = complex.createComplexArray();
 
       complex.transform(expected, input, 'complex');
 
       const self = new FFT(size);
       const out = self.createComplexArray();
-      self.realTransform(out, input);
+      self.realTransform(out, realInput);
       self.completeSpectrum(out);
       fixRoundEqual(out, expected);
     });
@@ -188,15 +191,18 @@ describe('FFT.js', () => {
       const ex = new external.complex(size, false);
 
       const input = new Float64Array(size * 2);
-      for (let i = 0; i < input.length; i += 2)
+      const realInput = new Array(size);
+      for (let i = 0; i < input.length; i += 2) {
         input[i] = generator(i >>> 1);
+        realInput[i >>> 1] = input[i];
+      }
       const expected = new Float64Array(size * 2);
 
       ex.simple(expected, input, 'complex');
 
       const self = new FFT(size);
       const out = self.createComplexArray();
-      self.realTransform(out, input);
+      self.realTransform(out, realInput);
       self.completeSpectrum(out);
       fixRoundEqual(out, expected);
     });

@@ -14,14 +14,14 @@ const f = new FFT(4096);
 const input = new Array(4096);
 input.fill(0);
 
-const data = f.toComplexArray(input);
 const out = f.createComplexArray();
 ```
 
 If `data` has just real numbers as is the case when `toComplexArray` is
 used - real FFT may be run to compute it 25% faster:
 ```js
-f.realTransform(out, data);
+const realInput = new Array(f.size);
+f.realTransform(out, realInput);
 ```
 
 `realTransform` fills just the left half of the `out`, so if the full
@@ -32,6 +32,7 @@ f.completeSpectrum(out);
 
 If `data` on other hand is a complex array:
 ```js
+const data = f.toComplexArray(input);
 f.transform(out, data);
 ```
 
