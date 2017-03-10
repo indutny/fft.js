@@ -4,8 +4,13 @@ const assert = require('assert');
 const external = require('fft');
 const FFT = require('../');
 
-function fixRound(r) {
-  return Math.round(r * 1000) / 1000;
+function fixRoundEqual(actual, expected) {
+  function fixRound(r) {
+    return Math.round(r * 1000) / 1000;
+  }
+
+  assert.strictEqual(actual.map(fixRound).join(':'),
+                     expected.map(fixRound).join(':'));
 }
 
 describe('FFT.js', () => {
@@ -95,7 +100,7 @@ describe('FFT.js', () => {
     const out = f.createComplexArray();
     let data = f.toComplexArray([ 1, 0.707106, 0, -0.707106 ]);
     f.transform(out, data);
-    assert.deepEqual(out.map(fixRound), [ 1, 0, 1, -1.414, 1, 0, 1, 1.414 ]);
+    fixRoundEqual(out, [ 1, 0, 1, -1.414, 1, 0, 1, 1.414 ]);
 
     data = f.toComplexArray([ 1, 0, -1, 0 ]);
     f.transform(out, data);
@@ -108,8 +113,7 @@ describe('FFT.js', () => {
     const out = f.createComplexArray();
     const data = f.toComplexArray([ 1, 0.707106, 0, -0.707106 ]);
     f.transform(out, data);
-    // [ 1, 0, 1, -1.414212, 1, 0, 0.9999999999999999, 1.414212 ]
-    assert.deepEqual(out.map(fixRound), [ 1, 0, 1, -1.414, 1, 0, 1, 1.414 ]);
+    fixRoundEqual(out, [ 1, 0, 1, -1.414, 1, 0, 1, 1.414 ]);
     f.inverseTransform(data, out);
     assert.deepEqual(f.fromComplexArray(data), [ 1, 0.707106, 0, -0.707106 ]);
   });
@@ -125,7 +129,7 @@ describe('FFT.js', () => {
     let data = f.toComplexArray(input);
     f.transform(out, data);
     f.inverseTransform(data, out);
-    assert.deepEqual(f.fromComplexArray(data).map(fixRound), input);
+    fixRoundEqual(f.fromComplexArray(data), input);
   });
 
   it('should transform big recursive radix-2 case', () => {
@@ -139,17 +143,16 @@ describe('FFT.js', () => {
     let data = f.toComplexArray(input);
     f.transform(out, data);
     f.inverseTransform(data, out);
-    assert.deepEqual(f.fromComplexArray(data).map(fixRound), input);
+    fixRoundEqual(f.fromComplexArray(data), input);
   });
 
-  it('should verify against other library', () => {
-    const sizes = [ 2, 4, 8, 16, 512, 1024, 2048, 4096 ];
-    sizes.forEach((size) => {
+  function externalLib(generator, size) {
+    it('should verify against other library', () => {
       const ex = new external.complex(size, false);
 
       const input = new Float64Array(size * 2);
       for (let i = 0; i < input.length; i += 2)
-        input[i] = i >>> 1;
+        input[i] = generator(i >>> 1);
       const expected = new Float64Array(size * 2);
 
       ex.simple(expected, input, 'complex');
@@ -157,7 +160,82 @@ describe('FFT.js', () => {
       const self = new FFT(size);
       const out = self.createComplexArray();
       self.transform(out, input);
-      assert.deepEqual(out.map(fixRound), expected.map(fixRound));
+      fixRoundEqual(out, expected);
+    });
+  }
+
+  function realVsComplex(generator, size) {
+    it('should verify real transform against complex transform', () => {
+      const complex = new FFT(size);
+
+      const input = complex.createComplexArray();
+      for (let i = 0; i < input.length; i += 2)
+        input[i] = generator(i >>> 1);
+      const expected = complex.createComplexArray();
+
+      complex.transform(expected, input, 'complex');
+
+      const self = new FFT(size);
+      const out = self.createComplexArray();
+      self.realTransform(out, input);
+      self.completeSpectrum(out);
+      fixRoundEqual(out, expected);
+    });
+  }
+
+  function realVsExternal(generator, size) {
+    it('should verify real transform against other library', () => {
+      const ex = new external.complex(size, false);
+
+      const input = new Float64Array(size * 2);
+      for (let i = 0; i < input.length; i += 2)
+        input[i] = generator(i >>> 1);
+      const expected = new Float64Array(size * 2);
+
+      ex.simple(expected, input, 'complex');
+
+      const self = new FFT(size);
+      const out = self.createComplexArray();
+      self.realTransform(out, input);
+      self.completeSpectrum(out);
+      fixRoundEqual(out, expected);
+    });
+  }
+
+  describe('cross-verify', () => {
+    function ascending(i) {
+      return i;
+    }
+
+    function sin(i) {
+      return Math.sin(i);
+    }
+
+    function rand() {
+      return (Math.random() - 0.5) * 2;
+    }
+
+    const sizes = [ 2, 4, 8, 16, 512, 1024, 2048, 4096 ];
+    sizes.forEach((size) => {
+      describe(`size=${size}`, () => {
+        function every(generator) {
+          externalLib(generator, size);
+          realVsComplex(generator, size);
+          realVsExternal(generator, size);
+        }
+
+        describe('ascending', () => {
+          every(ascending);
+        });
+
+        describe('sin', () => {
+          every(sin);
+        });
+
+        describe('rand', () => {
+          every(rand);
+        });
+      });
     });
   });
 });

@@ -105,12 +105,35 @@ function transform(size) {
   return suite;
 }
 
+function addRealSelf(suite, size) {
+  const f = new FFT(size);
+  const input = createInput(f.size);
+  const data = f.toComplexArray(input);
+  const out = f.createComplexArray();
+
+  addFiltered(suite, 'fft.js', () => {
+    f.realTransform(out, data);
+  });
+}
+
+function realTransform(size) {
+  const suite = new benchmark.Suite();
+
+  addRealSelf(suite, size);
+
+  return suite;
+}
+
 const benchmarks = [
   { title: 'table construction', suite: construct(16384) },
   { title: 'transform size=2048', suite: transform(2048) },
   { title: 'transform size=4096', suite: transform(4096) },
   { title: 'transform size=8192', suite: transform(8192) },
-  { title: 'transform size=16384', suite: transform(16384) }
+  { title: 'transform size=16384', suite: transform(16384) },
+  { title: 'realTransform size=2048', suite: realTransform(2048) },
+  { title: 'realTransform size=4096', suite: realTransform(4096) },
+  { title: 'realTransform size=8192', suite: realTransform(8192) },
+  { title: 'realTransform size=16384', suite: realTransform(16384) }
 ];
 
 /* eslint-disable no-console */

@@ -4,3 +4,7 @@ test/
 dist/
 bench/
 *.tex
+*.aux
+*.log
+*.pdf
+*.gz

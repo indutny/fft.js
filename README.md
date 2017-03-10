@@ -16,12 +16,27 @@ input.fill(0);
 
 const data = f.toComplexArray(input);
 const out = f.createComplexArray();
+```
 
+If `data` has just real numbers as is the case when `toComplexArray` is
+used - real FFT may be run to compute it 25% faster:
+```js
+f.realTransform(out, data);
+```
+
+`realTransform` fills just the left half of the `out`, so if the full
+spectrum is needed (which is symmetric):
+```js
+f.completeSpectrum(out);
+```
+
+If `data` on other hand is a complex array:
+```js
 f.transform(out, data);
-console.log(out);
-console.log(f.fromComplexArray(out));
+```
 
-// For inverse - use:
+Inverse fourier transform:
+```js
 f.inverseTransform(data, out);
 ```
 
@@ -55,6 +70,18 @@ $ npm run bench
     jensnockert x 855 ops/sec ±1.02% (92 runs sampled)
     dsp.js x 948 ops/sec ±0.70% (94 runs sampled)
     drom x 1,428 ops/sec ±0.56% (93 runs sampled)
+  Fastest is fft.js
+===== realTransform size=2048 =====
+    fft.js x 44,499 ops/sec ±0.71% (90 runs sampled)
+  Fastest is fft.js
+===== realTransform size=4096 =====
+    fft.js x 19,234 ops/sec ±0.84% (93 runs sampled)
+  Fastest is fft.js
+===== realTransform size=8192 =====
+    fft.js x 9,137 ops/sec ±0.83% (94 runs sampled)
+  Fastest is fft.js
+===== realTransform size=16384 =====
+    fft.js x 3,873 ops/sec ±1.69% (93 runs sampled)
   Fastest is fft.js
 ```
 
