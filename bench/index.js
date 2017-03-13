@@ -121,7 +121,7 @@ function addFourierTransform(suite, size) {
   const forward = external.fourierTransform;
 
   const input = createInput(size);
-  suite.add('fourier-transform', () => {
+  addFiltered(suite, 'fourier-transform', () => {
     // It is not exactly fair, since `fourier-transform` also computes
     // magnitude. However, when removing this magnitude code locally, fft.js
     // outperforms `fourier-transform` by almost the same margin.
