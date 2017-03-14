@@ -41,7 +41,7 @@ Inverse fourier transform:
 f.inverseTransform(data, out);
 ```
 
-## Benchmark
+## Benchmarks
 
 ```
 $ npm run bench
@@ -89,6 +89,91 @@ $ npm run bench
     fourier-transform x 2,745 ops/sec ±0.68% (94 runs sampled)
   Fastest is fft.js
 ```
+
+## API Details
+
+### Constructor
+
+```js
+const FFT = require('fft.js');
+
+const fft = new FFT(size);
+```
+
+NOTE: `size` MUST be a power of two and MUST be bigger than 1.
+
+### Input/Output formats and helper methods.
+
+#### `fft.createComplexArray()`
+
+Create an array of size equal to `fft.size * 2`.
+This array contains `fft.size` complex numbers whose real and imaginary parts
+are interleaved like this:
+
+```js
+const complexArray = [ real0, imaginary0, real1, imaginary1, ... ];
+```
+
+#### `fft.toComplexArray(realInput, /* optional */ storage)`
+
+Use provided `storage` or create a new complex array and fill all
+real slots with values from `realInput` array, and all imaginary slots with
+zeroes.
+
+NOTE: Always provide `storage` for better performance and to avoid extra time
+in Garbage Collection.
+
+#### `fft.fromComplexArray(complexInput, /* optional */ storage)`
+
+Use provided `storage` or create an array of size `fft.size` and fill it with
+real values from the `complexInput`.
+
+NOTE: Imaginary values from `complexInput` are ignored. This is a convenience
+method.
+
+NOTE: Always provide `storage` for better performance and to avoid extra time
+in Garbage Collection.
+
+#### `fft.completeSpectrum(spectrum)`
+
+Fill the right half of `spectrum` complex array (See:
+`fft.createComplexArray()`) with the complex conjugates of the left half:
+
+```js
+for (every every `i` between 1 and (N / 2 - 1))
+  spectrum[N - i] = spectrum*[i]
+```
+
+NOTE: This method may be used with `fft.realTransform()` if full output is
+desired.
+
+### FFT Methods
+
+### `fft.realTransform(output, input)`
+
+Take array of real numbers `input` and perform FFT transformation on it, filling
+the left half of the `output` with complex values (See:
+`fft.completeSpectrum()`).
+
+NOTE: Always use this method if the input for FFT transformation is real (has
+no imaginary parts). It is about 40% faster to do such transformation this way.
+
+NOTE: `input` - real array of size `fft.size`, `output` - complex array (See:
+`fft.createComplexArray()`).
+
+### `fft.transform(output, input)`
+
+Perform transformation on complex `input` array and store results in
+the complex `output` array.
+
+NOTE: `input` and `output` are complex arrays (See: `fft.createComplexArray()`).
+
+### `fft.inverseTransform(output, input)`
+
+Perform inverse Fourier transform on complex `input` array and store results in
+the complex `output` array.
+
+NOTE: `input` and `output` are complex arrays (See: `fft.createComplexArray()`).
 
 #### LICENSE
 
