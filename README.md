@@ -120,19 +120,19 @@ Use provided `storage` or create a new complex array and fill all
 real slots with values from `realInput` array, and all imaginary slots with
 zeroes.
 
-NOTE: Always provide `storage` for better performance and to avoid extra time
-in Garbage Collection.
+_NOTE: Always provide `storage` for better performance and to avoid extra time
+in Garbage Collection._
 
 #### `fft.fromComplexArray(complexInput, /* optional */ storage)`
 
 Use provided `storage` or create an array of size `fft.size` and fill it with
 real values from the `complexInput`.
 
-NOTE: Imaginary values from `complexInput` are ignored. This is a convenience
-method.
+_NOTE: Imaginary values from `complexInput` are ignored. This is a convenience
+method._
 
-NOTE: Always provide `storage` for better performance and to avoid extra time
-in Garbage Collection.
+_NOTE: Always provide `storage` for better performance and to avoid extra time
+in Garbage Collection._
 
 #### `fft.completeSpectrum(spectrum)`
 
@@ -144,36 +144,38 @@ for (every every `i` between 1 and (N / 2 - 1))
   spectrum[N - i] = spectrum*[i]
 ```
 
-NOTE: This method may be used with `fft.realTransform()` if full output is
-desired.
+_NOTE: This method may be used with `fft.realTransform()` if full output is
+desired._
 
 ### FFT Methods
 
-### `fft.realTransform(output, input)`
+#### `fft.realTransform(output, input)`
 
 Take array of real numbers `input` and perform FFT transformation on it, filling
 the left half of the `output` with complex values (See:
 `fft.completeSpectrum()`).
 
-NOTE: Always use this method if the input for FFT transformation is real (has
-no imaginary parts). It is about 40% faster to do such transformation this way.
+_NOTE: Always use this method if the input for FFT transformation is real (has
+no imaginary parts). It is about 40% faster to do such transformation this way._
 
-NOTE: `input` - real array of size `fft.size`, `output` - complex array (See:
-`fft.createComplexArray()`).
+_NOTE: `input` - real array of size `fft.size`, `output` - complex array (See:
+`fft.createComplexArray()`)._
 
-### `fft.transform(output, input)`
+#### `fft.transform(output, input)`
 
 Perform transformation on complex `input` array and store results in
 the complex `output` array.
 
-NOTE: `input` and `output` are complex arrays (See: `fft.createComplexArray()`).
+_NOTE: `input` and `output` are complex arrays (See:
+`fft.createComplexArray()`)._
 
-### `fft.inverseTransform(output, input)`
+#### `fft.inverseTransform(output, input)`
 
 Perform inverse Fourier transform on complex `input` array and store results in
 the complex `output` array.
 
-NOTE: `input` and `output` are complex arrays (See: `fft.createComplexArray()`).
+_NOTE: `input` and `output` are complex arrays (See:
+`fft.createComplexArray()`)._
 
 #### LICENSE
 
