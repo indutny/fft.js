@@ -19,6 +19,7 @@
     "dsp.js": "github:corbanbrook/dsp.js",
     "fft": "^0.2.1",
     "fourier": "^0.2.1",
-    "fourier-transform": "^1.0.2"
+    "fourier-transform": "^1.0.2",
+    "ooura": "^2.0.0"
   }
 }
