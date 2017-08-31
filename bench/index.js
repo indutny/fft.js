@@ -5,7 +5,8 @@ const external = {
   jensnockert: require('fft'),
   dspjs: require('dsp.js'),
   drom: require('fourier'),
-  fourierTransform: require('fourier-transform')
+  fourierTransform: require('fourier-transform'),
+  ooura: require('ooura')
 };
 const benchmark = require('benchmark');
 
@@ -95,6 +96,15 @@ function addDrom(suite, size) {
   });
 }
 
+function addOoura(suite, size) {
+  const f = new external.ooura(size);
+  const input = f.scalarArrayFactory();
+
+  addFiltered(suite, 'ooura', () => {
+    f.fftInPlace(input.buffer);
+  });
+}
+
 function transform(size) {
   const suite = new benchmark.Suite();
 
@@ -102,6 +112,7 @@ function transform(size) {
   addJensNockert(suite, size);
   addDSPJS(suite, size);
   addDrom(suite, size);
+  addOoura(suite, size);
 
   return suite;
 }
