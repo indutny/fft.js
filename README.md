@@ -25,7 +25,7 @@ f.realTransform(out, realInput);
 ```
 
 `realTransform` fills just the left half of the `out`, so if the full
-spectrum is needed (which is symmetric):
+spectrum is needed (which is symmetric), do the following:
 ```js
 f.completeSpectrum(out);
 ```
@@ -102,6 +102,8 @@ const fft = new FFT(size);
 
 NOTE: `size` MUST be a power of two and MUST be bigger than 1.
 
+If you are looking to find the nearest power of 2 given the size of your dataset, here is a [good tutorial](https://stackoverflow.com/questions/466204/rounding-up-to-next-power-of-2/466256#466256)
+
 ### Input/Output formats and helper methods.
 
 #### `fft.createComplexArray()`
@@ -152,7 +154,7 @@ desired._
 #### `fft.realTransform(output, input)`
 
 Take array of real numbers `input` and perform FFT transformation on it, filling
-the left half of the `output` with complex values (See:
+the left half of the `output` with the real part of the Fourier Transform's complex output (See:
 `fft.completeSpectrum()`).
 
 _NOTE: Always use this method if the input for FFT transformation is real (has
