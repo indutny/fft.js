@@ -102,8 +102,7 @@ const fft = new FFT(size);
 
 NOTE: `size` MUST be a power of two and MUST be bigger than 1.
 
-If you are looking to find the nearest power of 2 given the size of your dataset, here is a good tutorial:
-https://stackoverflow.com/questions/466204/rounding-up-to-next-power-of-2/466256#466256
+If you are looking to find the nearest power of 2 given the size of your dataset, here is a [good tutorial](https://stackoverflow.com/questions/466204/rounding-up-to-next-power-of-2/466256#466256)
 
 ### Input/Output formats and helper methods.
 
