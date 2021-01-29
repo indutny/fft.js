@@ -1,10 +1,12 @@
-sudo: false
 
 language: node_js
 
+os: linux
+dist: bionic
+
 node_js:
-  - "4"
-  - "6"
+  - "10"
+  - "12"
   - "stable"
 
 script:
